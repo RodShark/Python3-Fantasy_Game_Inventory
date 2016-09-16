@@ -23,9 +23,9 @@ def display_inventory(inventory):
     print("Here are the items inside your inventory:")
     total = 0
     for item_name, item_amount in inventory.items():
-        print("{} {}".format(str(item_amount), item_name))
+        print("{} {}".format(item_amount, item_name))  # python will cast integers to strings during formatting automatically
         total += item_amount
-    print("Your total items in your inventory comes out to: {} items.".format(str(total)))
+    print("Your total items in your inventory comes out to: {} items.".format(total))  # how would you handle only having one item? (i.e., 'one items')
 
 
 display_inventory(game_inventory)
@@ -37,8 +37,8 @@ boss_loot = ["gold coin", "sword", "gold coin", "ruby", "gold coin"]
 
 print("\nYou just killed a boss, nice going! Here's the loot you get from that:\n")
 
-for spoils in boss_loot:
-    print("A {}".format(spoils))
+for treasure in boss_loot:  # I got confused since "spoils" was plural.  I'm a little slow but reading code is hard.
+    print("A {}".format(treasure))
 
 print("\nNow here's what your inventory looks like.\n")
 
@@ -48,10 +48,7 @@ print("\nNow here's what your inventory looks like.\n")
 
 def add_to_inventory(loot_table, inventory):
     for item in loot_table:
-        if item in inventory:
-            inventory[item] += 1
-        else:
-            inventory[item] = inventory.get(item, 1)  # Not working currently.
+        inventory[item] = inventory.get(item, 0) + 1  # A little clearer
 
 add_to_inventory(boss_loot, game_inventory)
 display_inventory(game_inventory)
